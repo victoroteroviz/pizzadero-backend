@@ -1,0 +1,17 @@
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    container_name: pizzadero_db
+    volumes:
+      - pizzadero:/var/lib/postgresql/data  # ✅ Ruta corregida y volumen nombrado
+
+volumes:
+  pizzadero:
