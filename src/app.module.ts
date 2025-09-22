@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { EntitiesPizzaderoModule } from './entities/entities-pizzadero.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './modules/auth/auth.module';
+import { AutorizacionModule } from './modules/autorizacion/autorizacion.module';
 // import process from 'process';
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { AuthModule } from './modules/auth/auth.module';
       autoLoadEntities: true,
       synchronize: true, // Desactivar en producción
     }),
-    AuthModule,
+    AutorizacionModule,
   ],
   controllers: [],
   providers: [],

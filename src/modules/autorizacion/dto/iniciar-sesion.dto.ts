@@ -1,12 +1,12 @@
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
-export class LoginDto {
+export class IniciarSesionDto {
   @IsEmail()
   @IsNotEmpty()
   @Length(6, 100)
-  email: string;
+  correo: string;
 
   @IsNotEmpty()
   @Length(8, 15)
-  password: string;
+  contrasena: string;
 }
