@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
@@ -11,8 +12,10 @@ import { UsuarioEntity } from './usuario.entity';
 
 @Entity('sesion')
 export class SesionEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('uuid', {
+    name: 'id_sesion',
+  })
+  idSesion: string;
 
   @Column({
     type: 'varchar',
@@ -52,6 +55,7 @@ export class SesionEntity {
     type: 'boolean',
     default: false,
     comment: 'Se usa para saber si hay sesion abierta',
+    name: 'sesion_abierta',
   })
   sesionAbierta: boolean;
 
@@ -65,20 +69,30 @@ export class SesionEntity {
 
   @Column({
     type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
+    nullable: true,
     comment: 'Fecha y hora de expiración de la sesión',
     name: 'expira_sesion',
   })
   expiraSesion: Date;
 
-  @CreateDateColumn({})
+  @CreateDateColumn({
+    name: 'fecha_creacion',
+  })
   fechaCreacion: Date;
 
-  @UpdateDateColumn({})
+  @UpdateDateColumn({
+    name: 'fecha_actualizacion',
+  })
   fechaActualizacion: Date;
+
+  @DeleteDateColumn({
+    name: 'fecha_eliminacion',
+  })
+  fechaEliminacion: Date;
 
   //#region R Usuario
   @OneToOne(() => UsuarioEntity, (usuario) => usuario.sesion)
   @JoinColumn({ name: 'usuario_id' })
   usuario: UsuarioEntity;
+  //#endregion
 }

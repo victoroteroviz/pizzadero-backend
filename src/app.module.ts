@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { EntitiesPizzaderoModule } from './entities/entities-pizzadero.module';
+import { EntitiesPizzaderoModule } from './entities/entidades-pizzadero.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AutorizacionModule } from './modules/autorizacion/autorizacion.module';
