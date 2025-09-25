@@ -94,5 +94,6 @@ export class SesionEntity {
   @OneToOne(() => UsuarioEntity, (usuario) => usuario.sesion)
   @JoinColumn({ name: 'usuario_id' })
   usuario: UsuarioEntity;
+  id: any;
   //#endregion
 }

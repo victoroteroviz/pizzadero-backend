@@ -15,33 +15,34 @@ import { SesionEntity } from 'src/entities';
 export class AutorizacionService {
   constructor(private readonly dataSource: DataSource) {}
 
-  async iniciarSesion(
-    iniciarSesionDto: IniciarSesionDto,
-  ): Promise<IniciarSesionResponse> {
+  async iniciarSesion(iniciarSesionDto: IniciarSesionDto) {
+    // : Promise<IniciarSesionResponse>
     const { correo, contrasena } = iniciarSesionDto;
 
     const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const usuario = await queryRunner.manager
-        .createQueryBuilder()
-        .select('s')
-        .from('sesion', 's')
-        .where('s.correo = :correo', { correo })
-        .getOne();
-
-      if (!usuario) {
-        throw new Error('Usuario no encontrado');
-      }
-
-      const sesion: SesionEntity = await queryRunner.manager.findOneOrFail(
+      const usuario: SesionEntity = await queryRunner.manager.findOneOrFail(
         SesionEntity,
         {
           where: { correo },
         },
       );
-      
+
+      const sesionPrecarga: SesionEntity | undefined =
+        await queryRunner.manager.preload(SesionEntity, {
+          id: usuario.idSesion,
+          sesionAbierta: true,
+        });
+
+      if (!sesionPrecarga) {
+        throw new InternalServerErrorException(
+          'Error al iniciar sesión, intente nuevamente',
+        );
+      }
+
+      await queryRunner.manager.save(SesionEntity, sesionPrecarga);
 
       const respuesta: IniciarSesionResponse = {
         status: 'success',
