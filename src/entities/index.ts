@@ -13,6 +13,8 @@ export { EstadoPedidoEntity } from './pedidos/estado-pedido.entity';
 export { ArticuloEntity } from './articulos/articulo.entity';
 export { PedidoArticuloEntity } from './articulos/pedido-articulo.entity';
 export { CategoriaEntity } from './articulos/categoria.entity';
+export { IngredienteExtraEntity } from './articulos/ingrediente-extra/ingrediente-extra.entity';
+export { PedidoArticuloExtraEntity } from './articulos/ingrediente-extra/pedido-articulo-extra.entity';
 
 //- Entidades de chat
 export { ClienteChatEntity } from './chat/cliente-chat.entity';

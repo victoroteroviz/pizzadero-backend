@@ -22,6 +22,8 @@ import { ClienteChatEntity } from './chat/cliente-chat.entity';
 import { HistorialChatEntity } from './chat/historial-chat.entity';
 import { ChatEntity } from './chat/chat.entity';
 import { IaChatEntity } from './chat/ia-chat.entity';
+import { PedidoArticuloExtraEntity } from './articulos/ingrediente-extra/pedido-articulo-extra.entity';
+import { IngredienteExtraEntity } from './articulos/ingrediente-extra/ingrediente-extra.entity';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { IaChatEntity } from './chat/ia-chat.entity';
       //* Entidades de articulos
       PedidoArticuloEntity,
       ArticuloEntity,
+      IngredienteExtraEntity,
+      PedidoArticuloExtraEntity,
       CategoriaEntity,
       //* Entidades de chat
       ClienteChatEntity,

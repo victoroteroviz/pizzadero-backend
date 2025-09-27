@@ -3,43 +3,43 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ArticuloEntity } from './articulo.entity';
+import { PedidoArticuloExtraEntity } from './pedido-articulo-extra.entity';
 
-@Entity('categoria')
-export class CategoriaEntity {
+@Entity('ingrediente_extra')
+export class IngredienteExtraEntity {
   @PrimaryGeneratedColumn('uuid', {
-    name: 'id_categoria',
+    name: 'id_ingrediente_extra',
   })
-  idCategoria: string;
+  idIngredienteExtra: string;
 
   @Column({
     type: 'varchar',
     length: 100,
     nullable: false,
     name: 'nombre',
-    comment: 'Nombre de la categoría',
+    comment: 'Nombre del ingrediente extra',
   })
   nombre: string;
 
   @Column({
-    type: 'text',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
     nullable: false,
-    name: 'descripcion',
-    comment: 'Descripción de la categoría',
+    name: 'precio',
+    comment: 'Precio del ingrediente extra',
   })
-  descripcion: string;
+  precio: number;
 
   @Column({
     type: 'boolean',
     default: true,
     name: 'esta_activo',
-    comment: 'Indica si la categoría está activa o no',
+    comment: 'Indica si el ingrediente extra está activo o no',
   })
   activo: boolean;
 
@@ -59,17 +59,11 @@ export class CategoriaEntity {
   fechaEliminacion: Date;
   //#endregion
 
-  //#region R Categoria Padre
-  @ManyToOne(() => CategoriaEntity, (categoria) => categoria.subcategorias)
-  @JoinColumn({ name: 'id_categoria_padre' })
-  categoriaPadre: CategoriaEntity;
-
-  @OneToMany(() => CategoriaEntity, (categoria) => categoria.categoriaPadre)
-  subcategorias: CategoriaEntity[];
-  //#endregion
-
-  //#region R Articulo
-  @OneToMany(() => ArticuloEntity, (articulo) => articulo.categoria)
-  articulos: ArticuloEntity[];
+  //#region R Pedido Articulo Extra
+  @OneToMany(
+    () => PedidoArticuloExtraEntity,
+    (pedidoArticuloExtra) => pedidoArticuloExtra.ingredienteExtra,
+  )
+  pedidoArticuloExtras: PedidoArticuloExtraEntity[];
   //#endregion
 }

@@ -72,9 +72,10 @@ export class HistorialChatEntity {
   //#endregion
 
   //#region R chat
-  @OneToMany(() => ChatEntity, (chat) => chat.historialChats, {
+  @ManyToOne(() => ChatEntity, (chat) => chat.historialChats, {
     nullable: true,
   })
-  chat: ChatEntity[];
+  @JoinColumn({ name: 'id_chat' })
+  chat: ChatEntity;
   //#endregion
 }

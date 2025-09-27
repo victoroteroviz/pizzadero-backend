@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { PedidoArticuloEntity } from './pedido-articulo.entity';
 import { CategoriaEntity } from './categoria.entity';
+import { PedidoArticuloExtraEntity } from './ingrediente-extra/pedido-articulo-extra.entity';
 
 @Entity('articulo')
 export class ArticuloEntity {
@@ -108,5 +109,13 @@ export class ArticuloEntity {
   @ManyToOne(() => CategoriaEntity, (categoria) => categoria.articulos)
   @JoinColumn({ name: 'id_categoria' })
   categoria: CategoriaEntity;
+  //#endregion
+
+  //#region R Pedido Articulo Extra
+  @OneToMany(
+    () => PedidoArticuloExtraEntity,
+    (pedidoArticuloExtra) => pedidoArticuloExtra.articuloEntity,
+  )
+  pedidoArticuloExtra: PedidoArticuloExtraEntity[];
   //#endregion
 }
