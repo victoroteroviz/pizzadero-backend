@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsUUID } from "class-validator";
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CerrarSesionDto {
   @IsNotEmpty()
-  @IsUUID()
-  id: string;
+  @IsEmail()
+  correo: string;
 }

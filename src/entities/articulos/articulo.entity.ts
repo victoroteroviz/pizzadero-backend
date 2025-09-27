@@ -46,11 +46,11 @@ export class ArticuloEntity {
   @Column({
     type: 'varchar',
     length: 50,
-    nullable: false,
+    nullable: true,
     name: 'tamano',
     comment: 'Tamaño del artículo',
   })
-  tamano: string;
+  tamano?: string | undefined;
   @Column({
     type: 'text',
     nullable: false,

@@ -70,6 +70,14 @@ export class SesionEntity {
   @Column({
     type: 'timestamp',
     nullable: true,
+    comment: 'Fecha y hora del último intento fallido de inicio de sesión',
+    name: 'ultimo_intento_fallido',
+  })
+  ultimoIntentoFallido: Date;
+
+  @Column({
+    type: 'timestamp',
+    nullable: true,
     comment: 'Fecha y hora de expiración de la sesión',
     name: 'expira_sesion',
   })
@@ -94,6 +102,5 @@ export class SesionEntity {
   @OneToOne(() => UsuarioEntity, (usuario) => usuario.sesion)
   @JoinColumn({ name: 'usuario_id' })
   usuario: UsuarioEntity;
-  id: any;
   //#endregion
 }
