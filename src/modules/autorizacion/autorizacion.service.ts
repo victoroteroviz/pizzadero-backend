@@ -6,6 +6,7 @@ import {
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
+  ConflictException,
 } from '@nestjs/common';
 
 //+ DTOs
@@ -136,9 +137,7 @@ export class AutorizacionService {
       }
 
       if (!sesion.sesionAbierta) {
-        throw new UnauthorizedException(
-          'El usuario no tiene una sesión abierta',
-        );
+        throw new ConflictException('El usuario no tiene una sesión abierta');
       }
 
       const sesionPrecarga: SesionEntity | undefined =

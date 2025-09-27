@@ -18,6 +18,9 @@ import { AutorizacionModule } from './modules/autorizacion/autorizacion.module';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true, // Desactivar en producción
+      extra: {
+        timezone: 'America/Mexico_City',
+      },
     }),
     AutorizacionModule,
   ],
